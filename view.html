@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='ru'>
+<head>
+	<meta charset="UTF-8" />
+	<title>Сервис сокращения ссылок</title>
+	<link rel='stylesheet' href='css/main.css' />
+</head>
+<body>
+	<section>
+		<h1>Сервис сокращения ссылок</h1>
+		<div id='easy_links'>
+			<div class='fl'>
+				<input name='original_link' type='text' value='' placeholder='Оригинальная ссылка' />
+				<br />
+				<span class='error_text'></span>
+			</div>
+			<div>
+				<button>Сгенерировать</button>
+			</div>
+			<div class='cl'></div>
+			
+			<div class='fl domain_link'>
+				http://test.tristfain.ru/
+			</div>
+			<div style='margin-left: 185px'>
+				<input name='short_link' type='text' value='' placeholder='Желаемая конечная ссылка, необязательно' style='width: 315px' /><br />
+				<span>Если оставить поле пустым, ссылка сгенерируется автоматически.</span><br />
+				<span class='error_text'></span>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Сокращенные ссылки</h2>
+		<table id='easy_links_table'>
+			<tr>
+				<th>Оригинальня ссылка</th>
+				<th>Сокращенная ссылка</th>
+				<th></th>
+			</tr>
+			<?php for ($i = 0; $i < count($all_urls); $i++): ?>
+				<tr>
+					<td><?=$all_urls[$i]['original']?></td>
+					<td>test.tristfain.ru/<?=$all_urls[$i]['short']?></td>
+					<td><button data-id='<?=$all_urls[$i]['id']?>' title='Удалить'>X</button></td>
+				</tr>
+			<? endfor ?>
+		</table>
+	</section>
+	
+<script src='js/func.js'></script>
+</body>
+</html>

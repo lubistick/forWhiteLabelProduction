@@ -1,0 +1,99 @@
+body
+{
+	font-family: Arial;
+	font-size: 14px;
+}
+
+h1, h2
+{
+	margin: 20px 0;
+}
+
+.fl
+{
+	float: left;
+	
+	margin-right: 10px;
+}
+.cl
+{
+	clear: both;
+	
+	margin-bottom: 20px;
+}
+section
+{
+	display: block;
+	
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin: 20px 10px;
+	
+	background: #eee;
+	border-radius: 2px;
+}
+
+#easy_links input[type=text]
+{
+	width: 500px;
+	padding: 5px;
+	border: 1px solid gray;
+	
+	border-radius: 2px;
+	font-size: 1em;
+}
+#easy_links input[type=text].error_border
+{
+	border-color: red;
+}
+#easy_links button
+{
+	padding: 5px;
+	border: 1px solid gray;
+	
+	cursor: pointer;
+	border-radius: 2px;
+}
+#easy_links span
+{
+	color: #aaa;
+	font-size: 0.8em;
+}
+#easy_links span.error_text
+{
+	color: red;
+}
+#easy_links .domain_link
+{
+	width: 175px;
+	
+	font-size: 1.3em;
+}
+
+#easy_links_table
+{
+	border: 1px solid gray;
+	width: 630px;
+	
+	border-radius: 2px;
+}
+#easy_links_table th
+{
+	text-align: left;
+}
+#easy_links_table th, #easy_links_table td
+{
+	padding: 5px;
+}
+#easy_links_table button
+{
+	border: none;
+	
+	color: black;
+	cursor: pointer;
+}
+#easy_links_table button:hover
+{
+	background: red;
+	color: white;
+}

@@ -1,7 +1,5 @@
 <?php
 
-require_once('config_class.php');
-
 class DataBase
 {
 	private $mysqli;

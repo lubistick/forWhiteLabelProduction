@@ -1,11 +1,7 @@
 <?php
 
 // автозагрузка классов, для ajax
-function myAutoload($class_name)
-{
-	require __DIR__ . '/../lib/' . mb_strtolower($class_name) . '_class.php';
-}
-spl_autoload_register('myAutoload');
+require '../lib/autoload.php';
 
 $db_obj = DataBase::getDBObject();
 

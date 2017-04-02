@@ -5,12 +5,13 @@ mb_internal_encoding('UTF-8');
 // автозагрузка классов
 require 'lib/autoload.php';
 
-$db_obj = DataBase::getDBObject(); // создаю экземпляр класса для работы с БД
+$db = DataBase::getDBObject(); // класс для работы с БД
+$table_urls = new TableUrls($db);  // класс для работы с таблицей "urls"
 
 // controller
 if (isset($_GET['url'])) {
-	if ($db_obj->isExists('urls', 'short', $_GET['url'])) {
-		$location = $db_obj->getField('urls', 'original', 'short', $_GET['url']); // получаю ссылку для редиректа
+	if ($table_urls->isExistsShort($_GET['url'])) {
+		$location = $table_urls->getOriginalOnShort($_GET['url']); // получаю ссылку для редиректа
 		header('Location: ' . $location); // редирект
 		exit();
 	} else {
@@ -19,6 +20,6 @@ if (isset($_GET['url'])) {
 		exit();
 	}
 } else {
-	$all_urls = $db_obj->getAll('urls'); // получаю всю таблицу Urls
+	$all_urls = $table_urls->getAll('urls'); // получаю всю таблицу Urls
 	include 'view.html'; // главная страница
 }

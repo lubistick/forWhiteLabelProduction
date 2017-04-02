@@ -3,12 +3,13 @@
 // автозагрузка классов, для ajax
 require '../lib/autoload.php';
 
-$db_obj = DataBase::getDBObject();
+$db = DataBase::getDBObject(); // класс для работы с БД
+$table_urls = new TableUrls($db);  // класс для работы с таблицей "urls"
 
 switch ($_POST['action']) {
 	
 	case 'delete_url':	
-		if ($db_obj->deleteOnId('urls', $_POST['id'])) {
+		if ($table_urls->deleteOnId($_POST['id'])) {
 			echo 'success';
 		} else {
 			echo 'error';
@@ -18,7 +19,7 @@ switch ($_POST['action']) {
 	case 'insert_url':
 		
 		if (!$_POST['short_link']) {
-			$short = $db_obj->generateUrl();
+			$short = $table_urls->generateShort();
 		} else {
 			// если пользователь сам вписал короткую ссылку, надо проверить ее на уникальность
 			$short = $_POST['short_link'];
@@ -26,13 +27,13 @@ switch ($_POST['action']) {
 				echo 'invalid_short';
 				break;
 			}
-			if ($db_obj->isExists('urls', 'short', $short)) {
+			if ($table_urls->isExistsShort($short)) {
 				echo 'short_is_exists';
 				break;
 			}
 		}
 		
-		if ($db_obj->insert('urls', array('original' => $_POST['original_link'], 'short' => $short))) {
+		if ($table_urls->insert($_POST['original_link'], $short)) {
 			echo $short; // возвращаю url, чтобы его добавить в DOM
 		} else {
 			echo 'error';

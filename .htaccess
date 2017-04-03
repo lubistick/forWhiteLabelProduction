@@ -8,4 +8,4 @@ RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 RewriteRule ^(.+)/$ /$1 [L,R=301]
 
-RewriteRule ^/?([0-9a-z]+)$ /?url=$1 [NC,L]
+RewriteRule ^/?([0-9A-Za-z]+)$ /?url=$1 [L]

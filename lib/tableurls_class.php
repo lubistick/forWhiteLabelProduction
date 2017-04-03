@@ -57,30 +57,20 @@ class TableUrls
 	
 	public function isExistsShort($short)
 	{
-		$sql = 'SELECT id FROM ' . $this->table_name . ' WHERE short = ?';
+		$sql = 'SELECT id FROM ' . $this->table_name . ' WHERE BINARY short = ? LIMIT 1'; 
+		// дописал LIMIT, наверно так будет работать быстрее
 		$stmt = $this->mysqli->prepare($sql);
 		$stmt->bind_param('s', $short);
 		$stmt->execute();
 		$stmt->bind_result($id);
 		
-		$i = 0;
-		$data = array();
-		while ($stmt->fetch()) {
-			$data[$i]['id'] = $id;
-			
-			$i++;
-		}
-		$stmt->close();
-		if (count($data) === 1) {
-			return true;
-		} else {
-			return false;
-		}
+		$stmt->fetch();
+		return $id;
 	}
 	
 	public function generateShort($length = 6)
 	{
-		$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		$chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // добавил большие буквы
 		//$chars = 'abcd';
 		$num_chars = strlen($chars);
 		$short = '';
@@ -100,7 +90,7 @@ class TableUrls
 	
 	public function getOriginalOnShort($short)
 	{ 
-		$sql = 'SELECT original FROM ' . $this->table_name . ' WHERE short = ?';
+		$sql = 'SELECT original FROM ' . $this->table_name . ' WHERE BINARY short = ?';
 		$stmt = $this->mysqli->prepare($sql);
 		$stmt->bind_param('s', $short);
 		$stmt->execute();
